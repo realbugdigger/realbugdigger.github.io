@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>DirDigger on </title>
+    <link>/tags/dirdigger/</link>
+    <description>Recent content in DirDigger on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 09 Jul 2023 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/dirdigger/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>DirDigger</title>
+      <link>/posts/dirdigger/</link>
+      <pubDate>Sun, 09 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/dirdigger/</guid>
+      <description>About project DirDigger is an efficient directory digging and busting tool that offers a range of features surpassing those of its alternatives. It serves a dual purpose, being an invaluable asset for both CTF enthusiasts and individuals engaged in the scanning of web app directories and API URLs encompassing bug bounty programs.
+Originally conceived as a portfolio project to create a Burp extension similar to gobuster/dirbuster, DirDigger experienced the creation and implementation of novel ideas and features, transforming it into a fully comprehensive directory digging tool.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on </title>
+    <link>/tags/</link>
+    <description>Recent content in Tags on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 09 Jul 2023 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>AppSec</title>
+      <link>/tags/appsec/</link>
+      <pubDate>Sun, 09 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/appsec/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>DirDigger</title>
+      <link>/tags/dirdigger/</link>
+      <pubDate>Sun, 09 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/dirdigger/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Web</title>
+      <link>/tags/web/</link>
+      <pubDate>Sun, 09 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/web/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
