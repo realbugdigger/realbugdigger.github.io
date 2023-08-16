@@ -34,12 +34,12 @@
   
  
 
-
-  
-  
-  
  
 
+
+  
+  
+  
  
 
 
@@ -63,11 +63,11 @@
 
 
 
-<title itemprop="name">Bug Digger - About</title>
-<meta property="og:title" content=Bug&#32;Digger&#32;-&#32;About />
-<meta name="twitter:title" content=Bug&#32;Digger&#32;-&#32;About />
-<meta itemprop="name" content=Bug&#32;Digger&#32;-&#32;About />
-<meta name="application-name" content=Bug&#32;Digger&#32;-&#32;About />
+<title itemprop="name">Bug Digger - DirDigger</title>
+<meta property="og:title" content=Bug&#32;Digger&#32;-&#32;DirDigger />
+<meta name="twitter:title" content=Bug&#32;Digger&#32;-&#32;DirDigger />
+<meta itemprop="name" content=Bug&#32;Digger&#32;-&#32;DirDigger />
+<meta name="application-name" content=Bug&#32;Digger&#32;-&#32;DirDigger />
 <meta property="og:site_name" content="" />
 
 
@@ -77,11 +77,11 @@
 <meta name="twitter:description" content="" />
 
 
-<base href="/about/" />
-<link rel="canonical" href="/about/" itemprop="url" />
-<meta name="url" content="/about/" />
-<meta name="twitter:url" content="/about/" />
-<meta property="og:url" content="/about/" />
+<base href="/projects/dirdigger/" />
+<link rel="canonical" href="/projects/dirdigger/" itemprop="url" />
+<meta name="url" content="/projects/dirdigger/" />
+<meta name="twitter:url" content="/projects/dirdigger/" />
+<meta property="og:url" content="/projects/dirdigger/" />
 
 
 
@@ -98,7 +98,6 @@
 
 
 <link rel="sitemap" type="application/xml" title="Sitemap" href='sitemap.xml' />
-<link href="/about/index.xml" rel="alternate" type="application/rss+xml" title="" />
 
 <meta name="robots" content="index,follow" />
 <meta name="googlebot" content="index,follow" />
@@ -125,14 +124,14 @@
     {
         "@context": "http://schema.org",
         "@type": "Article",
-        "headline": "About",
+        "headline": "DirDigger",
         "author": {
             "@type": "Person",
             "name": ""
         },
         "datePublished": "2023-07-09",
         "description": "",
-        "wordCount":  259 ,
+        "wordCount":  323 ,
         "mainEntityOfPage": "True",
         "dateModified": "2023-07-09",
         "image": {
@@ -359,23 +358,116 @@
 </aside>
 
             <main class="content container">
-                
-<div class="post">
+                <div class="post">
+  <div class="info">
+    <h1 class="post-title">
+        <a href="/projects/dirdigger/">DirDigger</a>
+    </h1>
     
-        <h1 class="post-title">About</h1>
-        <p>Hello and welcome, hackerspace explorers! This blog serves as the digital log on my journey towards becoming skillful in security research. The material you&rsquo;ll discover here reflects the progression of my journey and my passion for growing my skills.</p>
-<p>I am on a committed pursuit to establish a career in cybersecurity, with a special emphasis on <strong>0-day vulnerability research</strong>. My current main interests are reverse engineering, browsers, exploit dev, virtualization, iOS and malware, and as I explore these domains and uncover their intricacies, I&rsquo;ll be sharing invaluable insights and experiences right here.</p>
-<p>This blog is a made and maintained by a developer-hacker.
-If you&rsquo;re captivated by the world of cybersecurity just as I am, or if you&rsquo;re venturing into security research, you&rsquo;ll find yourself at home here. Bringing some programming knowledge to the table and starting from the bottom, I aspire to present my learnings in the most logical and comprehensible manner.</p>
-<p>Just as I am <em>striving for 0-day vulnerability research as my career</em>, my vision for this blog is to help like-minded individuals, eager to expand their understanding and proficiency whilst navigating the thrilling realm of security research. Jump into my world of evolving cybersecurity knowledge - from learning the basics, enhancing software competence, to honing the art of vulnerability research.</p>
-<p>Prepare yourself for an enlightening journey as we traverse the aspects of security research, one blog post at a time. Mistakes will be stepping stones, each learning will fuel the journey, and above all, we&rsquo;ll dive into the fascinating realms of cybersecurity research together.</p>
-<p>Stay curious</p>
-
+        <time datetime="2023-07-09T00:00:00Z" class="post-date">
+            July 9, 2023
+        </time>
+    
+    
+    <ul class="tags">
+        
+        <li class="tag-Web">
+            <a href="tags/web">Web</a>
+        </li>
+        
+        <li class="tag-AppSec">
+            <a href="tags/appsec">AppSec</a>
+        </li>
+        
+        <li class="tag-DirDigger">
+            <a href="tags/dirdigger">DirDigger</a>
+        </li>
+        
+    </ul>
+    
+    
+    
+    
+    
     
 </div>
 
+  <p><img src="https://raw.githubusercontent.com/realbugdigger/DirDigger/main/DD_MagGlass.svg" alt="DirDigger"></p>
+<h2 id="about-project">About project</h2>
+<p>DirDigger is an efficient directory digging and busting tool that offers a range of features surpassing those of its alternatives. It serves a dual purpose, being an invaluable asset for both CTF enthusiasts and individuals engaged in the scanning of web app directories and API URLs encompassing bug bounty programs.</p>
+<p>Originally conceived as a portfolio project to create a Burp extension similar to gobuster/dirbuster, DirDigger experienced the creation and implementation of novel ideas and features, transforming it into a fully comprehensive directory digging tool.</p>
+<hr>
+<h2 id="features">Features</h2>
+<p>DirDigger current features:</p>
+<ul>
+<li>Works as BurpSuite extension and as desktop java application</li>
+<li>Tree representation for existing urls</li>
+<li>Recursive (directory depth and thread number can be set)</li>
+<li>Proxy support</li>
+<li>Filtered response codes</li>
+<li>Follow redirects</li>
+<li>See urls that are grouped by redirect in a Redirect Tree (if redirects were followed)</li>
+<li>File extensions</li>
+<li>Multiple file loading for keywords list</li>
+<li>Rate limiter detection (if detected scanning will be slowed down)</li>
+<li>Ignoring volatile params</li>
+<li>Stopping and Continuing execution</li>
+<li>Saving progress to a file and option to load a file to continue execution or see results (useful when working in team)</li>
+</ul>
+<hr>
+<h2 id="screenshots">Screenshots</h2>
+<p>Existing target url directories representiation in Regular Tree
+<img src="https://raw.githubusercontent.com/realbugdigger/DirDigger/main/screenshot1.png" alt="DirDigger"></p>
+<p>Grouping urls by redirection in Redirect Tree
+<img src="https://raw.githubusercontent.com/realbugdigger/DirDigger/main/screenshot2.png" alt="DirDigger"></p>
+<hr>
+<h2 id="project-future">Project future</h2>
+<p>To-do list for future enhancements:</p>
+<ul>
+<li>Contexts (if domain has subdomains and you want to scan them at the same time, by changing context you can see progress and trees for a particular hostname)
+<ul>
+<li>In here maybe some cross context communication can exist (e.g. when one hostname redirects to another)</li>
+</ul>
+</li>
+<li>Pass selected urls, or 200 urls, to site map (one-way sync)
+<ul>
+<li>there can exist two-way sync also -&gt; to initialize tree in DirDigger extension based on site map and start working on that</li>
+</ul>
+</li>
+<li>add option to create contexts based on target (Burp targets)</li>
+<li>create cli version and modularize the project</li>
+<li>save threads and application state in some PostgreSQL db (can be useful for teams that are performing application security testing)</li>
+</ul>
+<hr>
+<p>Github project link: <a href="https://github.com/realbugdigger/DirDigger">https://github.com/realbugdigger/DirDigger</a></p>
+
+  <hr>
+<div class="footer">
+    
+	    
+	    
+    
+</div>
+
+  
+</div>
             </main>
             
+  <div class="article-toc ">
+    <div class="toc-wrapper">
+      <h4 id="contents"></h4>
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#about-project">About project</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#screenshots">Screenshots</a></li>
+    <li><a href="#project-future">Project future</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+
         </div>
     </body>
 </html>
