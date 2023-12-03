@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on </title>
+    <link>/posts/</link>
+    <description>Recent content in Posts on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 03 Dec 2023 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Compilers Introduction</title>
+      <link>/posts/compilerintro/</link>
+      <pubDate>Sun, 03 Dec 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/compilerintro/</guid>
+      <description>If you&amp;rsquo;ve ever found yourself intrigued by the complex science behind how exactly your written code transforms into an understandable stream of zeroes and ones, then you&amp;rsquo;re in exactly the right place. The realm of computer science goes far beyond just writing lines of code — at its core, it is about facilitating communication between humans and machines. This blog post pulls back the curtain on one such essential tool that makes this interaction possible: compilers.</description>
+    </item>
+    
+  </channel>
+</rss>

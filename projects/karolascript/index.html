@@ -63,11 +63,11 @@
 
 
 
-<title itemprop="name">Bug Digger - Minesweeper Hack</title>
-<meta property="og:title" content=Bug&#32;Digger&#32;-&#32;Minesweeper&#32;Hack />
-<meta name="twitter:title" content=Bug&#32;Digger&#32;-&#32;Minesweeper&#32;Hack />
-<meta itemprop="name" content=Bug&#32;Digger&#32;-&#32;Minesweeper&#32;Hack />
-<meta name="application-name" content=Bug&#32;Digger&#32;-&#32;Minesweeper&#32;Hack />
+<title itemprop="name">Bug Digger - KarolaScript</title>
+<meta property="og:title" content=Bug&#32;Digger&#32;-&#32;KarolaScript />
+<meta name="twitter:title" content=Bug&#32;Digger&#32;-&#32;KarolaScript />
+<meta itemprop="name" content=Bug&#32;Digger&#32;-&#32;KarolaScript />
+<meta name="application-name" content=Bug&#32;Digger&#32;-&#32;KarolaScript />
 <meta property="og:site_name" content="" />
 
 
@@ -77,11 +77,11 @@
 <meta name="twitter:description" content="" />
 
 
-<base href="/projects/minesweeper/" />
-<link rel="canonical" href="/projects/minesweeper/" itemprop="url" />
-<meta name="url" content="/projects/minesweeper/" />
-<meta name="twitter:url" content="/projects/minesweeper/" />
-<meta property="og:url" content="/projects/minesweeper/" />
+<base href="/projects/karolascript/" />
+<link rel="canonical" href="/projects/karolascript/" itemprop="url" />
+<meta name="url" content="/projects/karolascript/" />
+<meta name="twitter:url" content="/projects/karolascript/" />
+<meta property="og:url" content="/projects/karolascript/" />
 
 
 
@@ -94,7 +94,7 @@
 
 
 
-<meta property="og:updated_time" content=16008-16-12T80:00:23Z />
+<meta property="og:updated_time" content=3012-03-12T120:00:23Z />
 
 
 <link rel="sitemap" type="application/xml" title="Sitemap" href='sitemap.xml' />
@@ -124,16 +124,16 @@
     {
         "@context": "http://schema.org",
         "@type": "Article",
-        "headline": "Minesweeper Hack",
+        "headline": "KarolaScript",
         "author": {
             "@type": "Person",
             "name": ""
         },
-        "datePublished": "2023-08-16",
+        "datePublished": "2023-12-03",
         "description": "",
-        "wordCount":  942 ,
+        "wordCount":  1120 ,
         "mainEntityOfPage": "True",
-        "dateModified": "2023-08-16",
+        "dateModified": "2023-12-03",
         "image": {
             "@type": "imageObject",
             "url": "\/images\/unnamed3_huef2688c47c9cb8353889f7ef68d7bc45_16055_1200x630_fit_box_2.png"
@@ -393,22 +393,18 @@
                 <div class="post">
   <div class="info">
     <h1 class="post-title">
-        <a href="/projects/minesweeper/">Minesweeper Hack</a>
+        <a href="/projects/karolascript/">KarolaScript</a>
     </h1>
     
-        <time datetime="2023-08-16T00:00:00Z" class="post-date">
-            August 16, 2023
+        <time datetime="2023-12-03T00:00:00Z" class="post-date">
+            December 3, 2023
         </time>
     
     
     <ul class="tags">
         
-        <li class="tag-Reverse engineering">
-            <a href="tags/reverse-engineering">Reverse engineering</a>
-        </li>
-        
-        <li class="tag-GameHacking">
-            <a href="tags/gamehacking">GameHacking</a>
+        <li class="tag-Compilers">
+            <a href="tags/compilers">Compilers</a>
         </li>
         
     </ul>
@@ -420,93 +416,233 @@
     
 </div>
 
-  <p>This game is small enough not to be overwhelming, yet complex enough to make it a fun challenge.
-While there are definitely easier ways to crack this code, I&rsquo;ve chosen a learn-as-I-go approach which might not be the quickest, but undoubtedly helps me delve deeper into the essence of reverse engineering.</p>
-<hr>
-<p><img src="https://raw.githubusercontent.com/realbugdigger/MinesweeperHack/main/images/Minesweeper.png" alt="Minesweeper"></p>
-<h3 id="imported-libraries">Imported Libraries</h3>
-<p>Since minesweeper is a GUI application, it uses graphics function which prints those graphics to the screen.
-Idea is to find this function and print flag whenever there is a mine.</p>
-<p>After I open Ghidra and load the executable, in <code>Symbol Tree</code> window there are function imports from external libraries so that&rsquo;s where I&rsquo;ll look.
-I see two functions that are looking interesting so that&rsquo;s what i&rsquo;m going to examine further.</p>
-<p><img src="https://raw.githubusercontent.com/realbugdigger/MinesweeperHack/main/images/symbol_tree.png" alt="Symbol Tree"></p>
-<h4 id="beginpaint">BeginPaint</h4>
-<p>First function that I will try is <code>BeginPaint</code> in <code>USER32.DLL</code> and when looking at dissasembler looks like it has only one cross reference so it has been used only once.
-Unfortunately the decompiled function where its been used is a little complex so i&rsquo;ll skip it for now.</p>
-<h4 id="bitblt">BitBlt</h4>
-<p>I&rsquo;ll take a look now at <code>BitBlt</code> function in <code>GDI32.DLL</code> which is microsoft windows graphics device interface (GDI) library that enables applications to use graphics.</p>
-<p>Looking at the <a href="https://learn.microsoft.com/en-us/windows/win32/api/wingdi/nf-wingdi-bitblt" target="_blank">MSDN</a>
- and at the Ghidra decompiled function, looks like <em>source handle device context</em> is what is needed.</p>
-<p><img src="https://raw.githubusercontent.com/realbugdigger/MinesweeperHack/main/images/bitblt.png" alt="Ghidra BitBtl"></p>
-<p><img src="https://raw.githubusercontent.com/realbugdigger/MinesweeperHack/main/images/draw_update.png" alt="draw_update">
-Looking at the two cross refernces for BitBlt I see that the <code>FUN_010026a7</code> has some loop and I suspect that is used for drawing tiles and minefield <strong>only</strong> at the start of the game so I&rsquo;ll rename it to <code>draw_initial</code>.
-And the <code>FUN_01002646</code> which I will rename to <code>draw_update</code>, I guess that is called when GUI update is needed (e.g. displaying mines, opening tiles or setting flags).</p>
-<h3 id="debugger">Debugger</h3>
-<p>I&rsquo;ll put breakpoint at appropriate addresses in debugger and test my hipotesis.</p>
-<p><img src="https://raw.githubusercontent.com/realbugdigger/MinesweeperHack/main/images/drawUpdate_breakpoint.png" alt="draw_update_breakpoint"></p>
-<p><img src="https://raw.githubusercontent.com/realbugdigger/MinesweeperHack/main/images/drawInitial_breakpoint.png" alt="draw_inital_breakpoint"></p>
-<p>Aaaand my hipotesis seems to be true. <code>010026E2</code> is hit when we start the game and you can see in the next two pictures that first time we hit the breakpoint no tiles are drawn
-but as I keep pressing F9 to continue execution till next breakpoint tilles are beggining to show.</p>
-<p><img src="https://raw.githubusercontent.com/realbugdigger/MinesweeperHack/main/images/initalHit.png" alt="initial hit"></p>
-<p><img src="https://raw.githubusercontent.com/realbugdigger/MinesweeperHack/main/images/secondHit.png" alt="second hit on draw_initial"></p>
-<p>After the whole minefield has been initialized and drawn and application is waiting for our input, as soon as I press a random tile breakpoint <code>010026E2</code> has been hit (which is our breakpoint for <code>draw_update</code>).
-So this confirms the hipotesis.</p>
-<h4 id="minefield-memory">Minefield memory</h4>
-<p>Now when I take a closer look at the assembly section where draw_inital breakpoint was hit, there is <code>[ebx+esi]</code> where <code>esi</code> looks like an offset which is being updated throughout the loop and <code>ebx</code>
-is a fixed value (location in memory), so as this function is printing tiles throughout the loop this fixed value can probably be start of minefield array in memory!!!</p>
-<p>If we look memory section where <code>ebx</code> is referencing to we can see some interesting stuff.</p>
-<p><img src="https://raw.githubusercontent.com/realbugdigger/MinesweeperHack/main/images/minefield_memory.png" alt="Minefield memory"></p>
-<p><code>ebx</code> is referencing to the start of the minefield and <code>eax</code> will contain address of the current tile that is being printed.
-The grey marked byte is the location of a first tile in the minefield.
-We can now come to some conclussion based on this memory region:</p>
+  <p>In my quest to better comprehend the fascinating intricacies of compilation process, compiler, and interpreter knowledge, I embarked on a journey of creating my own programming language - KarolaScript.</p>
+<p>KarolaScript is a decidely bare-bones, yet enlightening endeavor, which brings the underpinnings of a language interpreter to the foreground. It doesn&rsquo;t boast rich features like an interactive debugger or a sophisticated static analyzer, as its primary purpose is to serve as a learning playground.</p>
+<p>KarolaScript, inspired by the fusion of Python and C, provides a procedurally-oriented, dynamically-typed programming environment. It distinguishes itself by recognizing classes and functions as first-class citizens; this allows for versatile usage scenarios such as assignment, passing as function parameters, and inclusion within complex data structures.</p>
+<p>The present method of code execution in KarolaScript involves recursive evaluation of the AST. An upcoming plan includes developing a virtual machine and dedicated bytecode to enhance efficiency. Please note, the current feature list includes class and function operations, control flows, code blocks, and advanced parser capabilities. Updates will be made as progress continues.</p>
+<h3 id="grammar">Grammar</h3>
+<pre><code>program           → declaration* EOF ;
+
+declaration       → classDecl | funDecl | varDecl | statement ;
+
+
+classDecl         → &quot;clazz&quot; IDENTIFIER ( &quot;&lt;&quot; IDENTIFIER )?
+                    &quot;{&quot; member* &quot;}&quot; ;
+
+member            → classMethodDecl | methodDecl ;
+classMethodDecl   → &quot;class&quot; IDENTIFIER &quot;(&quot; parameters? &quot;)&quot; block ;
+methodDecl        → function ;
+
+funDecl           → &quot;funct&quot; function ;
+
+function          → IDENTIFIER &quot;(&quot; parameters? &quot;)&quot; block ;
+parameters        → IDENTIFIER ( &quot;,&quot; IDENTIFIER )* ;
+
+anonFunDecl       → &quot;funct&quot; anonFunction ;
+anonFunction      → &quot;(&quot; parameters? &quot;)&quot; block ;
+
+
+varDecl           → &quot;let&quot; IDENTIFIER ( &quot;=&quot; expression )? &quot;;&quot; ;
+
+
+
+statement         → exprStmt | forStmt | ifStmt | printStmt | returnStmt | whileStmt | block | breakStmt;
+
+returnStmt        → &quot;return&quot; expression? &quot;;&quot; ;
+
+forStmt           → &quot;for&quot; &quot;(&quot; ( varDecl | exprStmt | &quot;;&quot; )
+                    expression? &quot;;&quot;
+                    expression? &quot;)&quot; statement ;
+
+whileStmt         → &quot;while&quot; &quot;(&quot; expression &quot;)&quot; statement ;
+
+exprStmt          → expression &quot;;&quot; ;
+
+ifStmt            → &quot;if&quot; &quot;(&quot; expression &quot;)&quot; statement
+                  ( &quot;else&quot; statement )? ;
+
+printStmt         → &quot;console&quot; expression &quot;;&quot; ;
+block             → &quot;{&quot; declaration* &quot;}&quot; ;
+breakStmt         → &quot;break&quot; &quot;;&quot; ;
+
+
+
+expression        → anonFunDecl | assignment ;
+
+assignment        → ( call &quot;.&quot; )? IDENTIFIER &quot;=&quot; logic_or | commaExpr ;
+
+commaExpr         → logic_or ( &quot;,&quot; logic_or )* ;
+
+logic_or          → logic_and ( &quot;or&quot; logic_and )* ;
+logic_and         → ternaryExpr ( &quot;and&quot; ternaryExpr )* ;
+
+ternaryExpr       → equality ( &quot;?&quot; equality &quot;:&quot; ternaryExpr )? ;
+
+
+
+equality          → comparison ( ( &quot;!=&quot; | &quot;==&quot; ) comparison )* ;
+comparison        → term ( ( &quot;&gt;&quot; | &quot;&gt;=&quot; | &quot;&lt;&quot; | &quot;&lt;=&quot; ) term )* ;
+term              → factor ( ( &quot;-&quot; | &quot;+&quot; ) factor )* ;
+factor            → unary ( ( &quot;/&quot; | &quot;*&quot; ) unary )* ;
+unary             → unaryOperator* primary | call;
+
+call              → primary ( &quot;(&quot; arguments? &quot;)&quot; | &quot;.&quot; IDENTIFIER )* ;
+arguments         → expression ( &quot;,&quot; expression )* ;
+
+primary           → errorPrimary | NUMBER | STRING | &quot;true&quot; | &quot;false&quot; | &quot;nil&quot; | &quot;(&quot; expression &quot;)&quot; | IDENTIFIER | &quot;super&quot; &quot;.&quot; IDENTIFIER ;
+errorPrimary      → binaryOperator expression ;
+unaryOperator     → ( &quot;!&quot; | &quot;-&quot; )
+binaryOperator    → ( &quot;!=&quot; | &quot;==&quot; | &quot;&gt;&quot; | &quot;&gt;=&quot; | &quot;&lt;&quot; | &quot;&lt;=&quot; | &quot;-&quot; | &quot;+&quot; | &quot;/&quot; | &quot;*&quot; )
+</code></pre><h3 id="standard-library">Standard library</h3>
+<p>KarolaScript stdlib consists of following functions:</p>
 <ul>
-<li><code>10</code> bytes are probably some kind of row delimiters</li>
-<li>Since we are playing on minefield with grid size 9x9, there are 10 mines which need to be found. If you look closely there are ten <code>8F</code> in the provided memory region so this must be our mines!</li>
-<li><code>0F</code> is just an empty tile</li>
+<li><code>console</code> for standard output</li>
+<li><code>input</code> for standard input</li>
+<li><code>clock</code> for getting epoch time</li>
+<li><code>sleep</code> for thread sleep for <em>n</em> miliseconds</li>
+<li><code>toUpper</code> and <code>toLower</code></li>
 </ul>
-<h2 id="code-cave">Code cave</h2>
-<p>Now my goal is when starting a patched game to see all the mines locations with flags on them.
-This can be accomplished with technique called <a href="https://en.wikipedia.org/wiki/Code_cave" target="_blank">Code cave</a>
-</p>
-<p>The game is performing AND operation with <code>0x1F</code> on line <code>10026E9</code> (see x64dbg screenshot snippet above), both <code>0x0F</code> and <code>0x8F</code> end up being <code>0x0F</code> which is empty tile.</p>
-<p>So what i need to do is change the logic:</p>
-<pre><code>if minefield[tile] == 0x8F
-   draw flag
-else
-   draw tile
-</code></pre><p>The present AND instruction takes 3 bytes of opcode while my logic is more than that. That&rsquo;s why code cave is needed.</p>
-<p>This is the assembly my logic needs:</p>
-<pre><code>CMP AL, 8F
-JNZ 01004D08
-MOV AL, 0E
-PUSH DWORD PTR DS:[EAX*4+1005A20]
-JMP 010026F3
-</code></pre><p><strong>How did i get <code>0E</code> byte?</strong>
-By flaging tile in minefield and looking into memory to see what was before and turned into <code>0E</code>.</p>
-<p>For my assembly code to run, I need to JMP from the original code. But as JMP opcode is more than 3 bytes, meaning I have to override not only the AND instruction but also the one following it (that&rsquo;s why 4th line exists in my assembly).
-The remaining bytes are padded with NOPs.</p>
-<p>That&rsquo;s it! Now when we patch the game and run it all mine fields are flaged :)</p>
-<p><img src="https://raw.githubusercontent.com/realbugdigger/MinesweeperHack/main/images/patched.png" alt="patched minesweeper"></p>
-<h2 id="alternate-ways-of-approaching-the-game">Alternate ways of approaching the game</h2>
-<p>When we open the game we can see that it consists of a minefield.
-The way I would program this game is to make minefield as a matrix and making mines load at random fields everytime we start a game.
-So you can start with that assumption.
-Look for some kind of &ldquo;random&rdquo; function in PE imports and I think that can get you rolling.</p>
-<p>When you start playing the game there are sounds being made: time ticker and mine explosion (possibly even more)
-Again look in PE Imports for some &ldquo;sound&rdquo; function because it&rsquo;s very unlikely they have made their own sound function for the game and just used existing one (possibly from Windows API).</p>
-<h2 id="conclusion">Conclusion</h2>
-<p>I hope that this writeup has helped someone and provided them some insight about reverse engineering.
-Inspiration and a lot of accumulated knowledge needed to complete this project came from <a href="https://www.begin.re/hacking-minesweeper">https://www.begin.re/hacking-minesweeper</a></p>
+<p>There is also builtin <code>Math</code> clazz with static functions:</p>
+<ul>
+<li><code>pwr</code> takes first argument to the power of two</li>
+<li><code>sqrr00t</code> returns square root of a argument</li>
+</ul>
+<h3 id="examples">Examples</h3>
+<p>Here are three code snippets with KarolaScript:</p>
+<h4 id="basic-operations">Basic operations</h4>
+<pre><code>let a = 5;
+let b = 2;
+
+console &quot;Hello World&quot; + (a + b);
+
+// console (10 / 0);
+
+let name = &quot;bug_digger&quot;;
+name = toUpper(name);
+console name;
+name = toLower(name);
+console name;
+
+let suffix = &quot;_hacker&quot;;
+console name + suffix;
+
+
+let truthy = false;
+console (truthy ? a : (a + b));
+
+
+console &quot;== Loops section ==\n\n&quot;;
+
+for (let i = 1; i &lt; 10; i = i + 1) {
+    console i;
+}
+
+let i = 0;
+while (i &lt;= 100) {
+    console i;
+    i = i + 10;
+}
+</code></pre><h4 id="functions-and-anonymous-functions">Functions and anonymous functions</h4>
+<pre><code>let pass = false;
+
+funct a () {
+    if (pass) {
+        console &quot;Help from function A again!&quot;;
+        return;
+    }
+    console &quot;Hello from function A!&quot;;
+    pass = true;
+}
+
+funct b() {
+    a();
+    console &quot;Hello from function B!&quot;;
+}
+
+console &quot;Regular hello&quot;;
+
+a();
+b();
+
+
+console &quot;\n\n\nAnonymous functions from here!!!\n\n\n&quot;;
+
+
+funct test(fn) {
+  for (let i = 1; i &lt;= 10; i = i + 1) {
+    fn(i);
+  }
+}
+
+test(funct (a) {
+  console a;
+  console &quot;Bug Digger is the best hacker!!!&quot;;
+});
+</code></pre><h4 id="classes-and-inheritance">Classes and inheritance</h4>
+<pre><code>clazz Vehicle {
+  honk() {
+    console &quot;Tuut, tuut.&quot;;
+  }
+
+  engine() {
+    console &quot;Brm, brm.&quot;;
+  }
+
+  static startEngine() {
+    console &quot;Click, click!!!&quot;;
+  }
+}
+
+clazz Car &lt; Vehicle {
+  engine() {
+    console &quot;Brrrrrmmm brmmmmmmmm brrrrmmmm&quot;;
+  }
+}
+
+Vehicle.startEngine();
+
+Car().engine();
+Car().honk();
+</code></pre><h3 id="metaclasses">Metaclasses</h3>
+<p>Metaclasses in KarolaScript are a form of <a href="https://en.wikipedia.org/wiki/Metaprogramming" target="_blank">metaprogramming</a>
+ as they enable the creation, modification, or management of classes in runtime.
+So, a metaclass is essentially a class for a class &ndash; it defines how a class behaves. So, just as an ordinary object is an instance of a class, a class is an instance of a metaclass.
+Metaclasses allow you to change how classes are created, typically for API development or building a framework. However, they are generally considered complex to use in daily tasks.
+Therefore, they are not commonly used despite being a powerful tool. Most programmers prefer simpler, more comprehensible programming methods.
+Metaclasses can introduce unexpected behavior and complexity, which is why they are often avoided in typical programming tasks.</p>
+<p>Currently exists only one metaclass called exactly <code>MetaClazz</code> and there is no way for user to create their own metaclass. That will change as project grows.</p>
+<p>The motto &ldquo;explicit is better than implicit&rdquo; from the Zen of Python applies here.
+If metaprogramming tools like metaclasses are used, they should be applied with care and for a good reason.</p>
+<h3 id="ideas-for-future-enhancements">Ideas for future enhancements</h3>
+<ul>
+<li>Number literals written in binary, hex, and octal</li>
+<li>Pratt Parser for expressions (currently it works with recursive descent for both expressions and statements)</li>
+<li>Arrays</li>
+<li>Add more functions to stdlib and more stdlib classes</li>
+<li>Improve error handling; Currently errors are only displayed on <code>stderr</code>, logging to a file will be a nice addition.
+<ul>
+<li>There is <code>ErrorReporter.h</code> file in utils folder. Some <a href="https://refactoring.guru/design-patterns/strategy" target="_blank">strategy design pattern</a>
+ can be used to select where to redirect errors and warnings.</li>
+</ul>
+</li>
+<li>Add VM with garbage collection and bytecode generation</li>
+<li>Add lambda but make it work like in Python</li>
+<li>Add possiblity for user to create his own metaclass; For example user-defined metaclasses can start with <code>$clazz</code></li>
+<li>Test cases</li>
+<li>Allow multiple code files</li>
+</ul>
+<h3 id="resources">Resources</h3>
+<p><a href="https://github.com/realbugdigger/KarolaScript">https://github.com/realbugdigger/KarolaScript</a></p>
 
   <hr>
 <div class="footer">
     
 	    
-            <a class="previous-post" href="/projects/dirdigger/?ref=footer"><span style="font-weight:bold;">« Previous</span><br>DirDigger</a>
+            <a class="previous-post" href="/projects/minesweeper/?ref=footer"><span style="font-weight:bold;">« Previous</span><br>Minesweeper Hack</a>
         
 	    
             <div class="next-post">
-                <a href="/projects/karolascript/?ref=footer"><span style="font-weight:bold;">Next »</span><br>KarolaScript</a>
+                <a href="/projects/codwaw_hack/?ref=footer"><span style="font-weight:bold;">Next »</span><br>Call of Duty WaW Zombie mod hack</a>
             </div>
         
     
@@ -523,13 +659,14 @@ Inspiration and a lot of accumulated knowledge needed to complete this project c
   <ul>
     <li>
       <ul>
-        <li><a href="#imported-libraries">Imported Libraries</a></li>
-        <li><a href="#debugger">Debugger</a></li>
+        <li><a href="#grammar">Grammar</a></li>
+        <li><a href="#standard-library">Standard library</a></li>
+        <li><a href="#examples">Examples</a></li>
+        <li><a href="#metaclasses">Metaclasses</a></li>
+        <li><a href="#ideas-for-future-enhancements">Ideas for future enhancements</a></li>
+        <li><a href="#resources">Resources</a></li>
       </ul>
     </li>
-    <li><a href="#code-cave">Code cave</a></li>
-    <li><a href="#alternate-ways-of-approaching-the-game">Alternate ways of approaching the game</a></li>
-    <li><a href="#conclusion">Conclusion</a></li>
   </ul>
 </nav>
     </div>

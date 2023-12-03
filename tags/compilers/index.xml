@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Compilers on </title>
+    <link>/tags/compilers/</link>
+    <description>Recent content in Compilers on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 03 Dec 2023 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/compilers/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Compilers Introduction</title>
+      <link>/posts/compilerintro/</link>
+      <pubDate>Sun, 03 Dec 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/compilerintro/</guid>
+      <description>If you&amp;rsquo;ve ever found yourself intrigued by the complex science behind how exactly your written code transforms into an understandable stream of zeroes and ones, then you&amp;rsquo;re in exactly the right place. The realm of computer science goes far beyond just writing lines of code — at its core, it is about facilitating communication between humans and machines. This blog post pulls back the curtain on one such essential tool that makes this interaction possible: compilers.</description>
+    </item>
+    
+    <item>
+      <title>KarolaScript</title>
+      <link>/projects/karolascript/</link>
+      <pubDate>Sun, 03 Dec 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/projects/karolascript/</guid>
+      <description>In my quest to better comprehend the fascinating intricacies of compilation process, compiler, and interpreter knowledge, I embarked on a journey of creating my own programming language - KarolaScript.
+KarolaScript is a decidely bare-bones, yet enlightening endeavor, which brings the underpinnings of a language interpreter to the foreground. It doesn&amp;rsquo;t boast rich features like an interactive debugger or a sophisticated static analyzer, as its primary purpose is to serve as a learning playground.</description>
+    </item>
+    
+  </channel>
+</rss>

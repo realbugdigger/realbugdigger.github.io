@@ -63,11 +63,11 @@
 
 
 
-<title itemprop="name">Bug Digger - Minesweeper Hack</title>
-<meta property="og:title" content=Bug&#32;Digger&#32;-&#32;Minesweeper&#32;Hack />
-<meta name="twitter:title" content=Bug&#32;Digger&#32;-&#32;Minesweeper&#32;Hack />
-<meta itemprop="name" content=Bug&#32;Digger&#32;-&#32;Minesweeper&#32;Hack />
-<meta name="application-name" content=Bug&#32;Digger&#32;-&#32;Minesweeper&#32;Hack />
+<title itemprop="name">Bug Digger - Call of Duty WaW Zombie mod hack</title>
+<meta property="og:title" content=Bug&#32;Digger&#32;-&#32;Call&#32;of&#32;Duty&#32;WaW&#32;Zombie&#32;mod&#32;hack />
+<meta name="twitter:title" content=Bug&#32;Digger&#32;-&#32;Call&#32;of&#32;Duty&#32;WaW&#32;Zombie&#32;mod&#32;hack />
+<meta itemprop="name" content=Bug&#32;Digger&#32;-&#32;Call&#32;of&#32;Duty&#32;WaW&#32;Zombie&#32;mod&#32;hack />
+<meta name="application-name" content=Bug&#32;Digger&#32;-&#32;Call&#32;of&#32;Duty&#32;WaW&#32;Zombie&#32;mod&#32;hack />
 <meta property="og:site_name" content="" />
 
 
@@ -77,11 +77,11 @@
 <meta name="twitter:description" content="" />
 
 
-<base href="/projects/minesweeper/" />
-<link rel="canonical" href="/projects/minesweeper/" itemprop="url" />
-<meta name="url" content="/projects/minesweeper/" />
-<meta name="twitter:url" content="/projects/minesweeper/" />
-<meta property="og:url" content="/projects/minesweeper/" />
+<base href="/projects/codwaw_hack/" />
+<link rel="canonical" href="/projects/codwaw_hack/" itemprop="url" />
+<meta name="url" content="/projects/codwaw_hack/" />
+<meta name="twitter:url" content="/projects/codwaw_hack/" />
+<meta property="og:url" content="/projects/codwaw_hack/" />
 
 
 
@@ -94,7 +94,7 @@
 
 
 
-<meta property="og:updated_time" content=16008-16-12T80:00:23Z />
+<meta property="og:updated_time" content=3012-03-12T120:00:23Z />
 
 
 <link rel="sitemap" type="application/xml" title="Sitemap" href='sitemap.xml' />
@@ -124,16 +124,16 @@
     {
         "@context": "http://schema.org",
         "@type": "Article",
-        "headline": "Minesweeper Hack",
+        "headline": "Call of Duty WaW Zombie mod hack",
         "author": {
             "@type": "Person",
             "name": ""
         },
-        "datePublished": "2023-08-16",
+        "datePublished": "2023-12-03",
         "description": "",
-        "wordCount":  942 ,
+        "wordCount":  1460 ,
         "mainEntityOfPage": "True",
-        "dateModified": "2023-08-16",
+        "dateModified": "2023-12-03",
         "image": {
             "@type": "imageObject",
             "url": "\/images\/unnamed3_huef2688c47c9cb8353889f7ef68d7bc45_16055_1200x630_fit_box_2.png"
@@ -393,11 +393,11 @@
                 <div class="post">
   <div class="info">
     <h1 class="post-title">
-        <a href="/projects/minesweeper/">Minesweeper Hack</a>
+        <a href="/projects/codwaw_hack/">Call of Duty WaW Zombie mod hack</a>
     </h1>
     
-        <time datetime="2023-08-16T00:00:00Z" class="post-date">
-            August 16, 2023
+        <time datetime="2023-12-03T00:00:00Z" class="post-date">
+            December 3, 2023
         </time>
     
     
@@ -420,95 +420,98 @@
     
 </div>
 
-  <p>This game is small enough not to be overwhelming, yet complex enough to make it a fun challenge.
-While there are definitely easier ways to crack this code, I&rsquo;ve chosen a learn-as-I-go approach which might not be the quickest, but undoubtedly helps me delve deeper into the essence of reverse engineering.</p>
-<hr>
-<p><img src="https://raw.githubusercontent.com/realbugdigger/MinesweeperHack/main/images/Minesweeper.png" alt="Minesweeper"></p>
-<h3 id="imported-libraries">Imported Libraries</h3>
-<p>Since minesweeper is a GUI application, it uses graphics function which prints those graphics to the screen.
-Idea is to find this function and print flag whenever there is a mine.</p>
-<p>After I open Ghidra and load the executable, in <code>Symbol Tree</code> window there are function imports from external libraries so that&rsquo;s where I&rsquo;ll look.
-I see two functions that are looking interesting so that&rsquo;s what i&rsquo;m going to examine further.</p>
-<p><img src="https://raw.githubusercontent.com/realbugdigger/MinesweeperHack/main/images/symbol_tree.png" alt="Symbol Tree"></p>
-<h4 id="beginpaint">BeginPaint</h4>
-<p>First function that I will try is <code>BeginPaint</code> in <code>USER32.DLL</code> and when looking at dissasembler looks like it has only one cross reference so it has been used only once.
-Unfortunately the decompiled function where its been used is a little complex so i&rsquo;ll skip it for now.</p>
-<h4 id="bitblt">BitBlt</h4>
-<p>I&rsquo;ll take a look now at <code>BitBlt</code> function in <code>GDI32.DLL</code> which is microsoft windows graphics device interface (GDI) library that enables applications to use graphics.</p>
-<p>Looking at the <a href="https://learn.microsoft.com/en-us/windows/win32/api/wingdi/nf-wingdi-bitblt" target="_blank">MSDN</a>
- and at the Ghidra decompiled function, looks like <em>source handle device context</em> is what is needed.</p>
-<p><img src="https://raw.githubusercontent.com/realbugdigger/MinesweeperHack/main/images/bitblt.png" alt="Ghidra BitBtl"></p>
-<p><img src="https://raw.githubusercontent.com/realbugdigger/MinesweeperHack/main/images/draw_update.png" alt="draw_update">
-Looking at the two cross refernces for BitBlt I see that the <code>FUN_010026a7</code> has some loop and I suspect that is used for drawing tiles and minefield <strong>only</strong> at the start of the game so I&rsquo;ll rename it to <code>draw_initial</code>.
-And the <code>FUN_01002646</code> which I will rename to <code>draw_update</code>, I guess that is called when GUI update is needed (e.g. displaying mines, opening tiles or setting flags).</p>
-<h3 id="debugger">Debugger</h3>
-<p>I&rsquo;ll put breakpoint at appropriate addresses in debugger and test my hipotesis.</p>
-<p><img src="https://raw.githubusercontent.com/realbugdigger/MinesweeperHack/main/images/drawUpdate_breakpoint.png" alt="draw_update_breakpoint"></p>
-<p><img src="https://raw.githubusercontent.com/realbugdigger/MinesweeperHack/main/images/drawInitial_breakpoint.png" alt="draw_inital_breakpoint"></p>
-<p>Aaaand my hipotesis seems to be true. <code>010026E2</code> is hit when we start the game and you can see in the next two pictures that first time we hit the breakpoint no tiles are drawn
-but as I keep pressing F9 to continue execution till next breakpoint tilles are beggining to show.</p>
-<p><img src="https://raw.githubusercontent.com/realbugdigger/MinesweeperHack/main/images/initalHit.png" alt="initial hit"></p>
-<p><img src="https://raw.githubusercontent.com/realbugdigger/MinesweeperHack/main/images/secondHit.png" alt="second hit on draw_initial"></p>
-<p>After the whole minefield has been initialized and drawn and application is waiting for our input, as soon as I press a random tile breakpoint <code>010026E2</code> has been hit (which is our breakpoint for <code>draw_update</code>).
-So this confirms the hipotesis.</p>
-<h4 id="minefield-memory">Minefield memory</h4>
-<p>Now when I take a closer look at the assembly section where draw_inital breakpoint was hit, there is <code>[ebx+esi]</code> where <code>esi</code> looks like an offset which is being updated throughout the loop and <code>ebx</code>
-is a fixed value (location in memory), so as this function is printing tiles throughout the loop this fixed value can probably be start of minefield array in memory!!!</p>
-<p>If we look memory section where <code>ebx</code> is referencing to we can see some interesting stuff.</p>
-<p><img src="https://raw.githubusercontent.com/realbugdigger/MinesweeperHack/main/images/minefield_memory.png" alt="Minefield memory"></p>
-<p><code>ebx</code> is referencing to the start of the minefield and <code>eax</code> will contain address of the current tile that is being printed.
-The grey marked byte is the location of a first tile in the minefield.
-We can now come to some conclussion based on this memory region:</p>
+  <p>Call of Duty&rsquo;s Zombie Mod stands as an adrenaline-packed action and daunting challenge.
+This game mode puts players through a test of endurance. However, sometimes, the thrill of the game can morph into frustration as the difficulty spikes. It&rsquo;s at times like these that a touch of ingenuity can alter the table&rsquo;s turn.
+As a seasoned player and a passionate hacker, I believe in tilting the scales a bit towards our favor every once in a while.</p>
+<p>This blog post will journey you through my unique exploration - a self-developed game hack specifically designed for the &lsquo;Call of Duty Zombie Mod&rsquo;.
+Consider it as a helping hand extended with love from one gamer to another, aiming to make those gaming sessions a little less daunting and a lot more enjoyable.</p>
+<h2 id="hack-content">Hack content</h2>
+<p><img src="https://raw.githubusercontent.com/realbugdigger/Call-of-Duty-WaW-Hack/master/images/ss2.png" alt="Loaded hack"></p>
+<p>When you run hack a menu with hack options will show inside the game.
+You can toggle the menu using <code>Insert</code> key on the keyboard.
+The options inside the menu are:</p>
 <ul>
-<li><code>10</code> bytes are probably some kind of row delimiters</li>
-<li>Since we are playing on minefield with grid size 9x9, there are 10 mines which need to be found. If you look closely there are ten <code>8F</code> in the provided memory region so this must be our mines!</li>
-<li><code>0F</code> is just an empty tile</li>
+<li><code>Snaplines [Numpad 1]</code> a red line will be drawn from local players view angle to zombie&rsquo;s feet</li>
+<li><code>2D Box [Numpad 2]</code> a red 2D box will be drawn around a zombie as a ESP feature so you can know where the zombies are (even behind walls)</li>
+<li><code>Status text [Numpad 4]</code> a status text will appear beneath zombie with remaining health for specific zombie</li>
+<li><code>Recoil crosshair [Numpad 5]</code> a custom crosshair will appear on the screen, since game one follows recoil</li>
+<li><code>Lock points to 50000 [Numpad 6]</code> a zombie points will constantly be set to 50000, therefore you can buy anything on the map</li>
+<li><code>Infinite health [Numpad 7]</code></li>
+<li><code>Infinite ammo [Numpad 8]</code></li>
+<li><code>Infinite grenades [Numpad 9]</code></li>
+<li><code>End</code> to eject a dll</li>
 </ul>
-<h2 id="code-cave">Code cave</h2>
-<p>Now my goal is when starting a patched game to see all the mines locations with flags on them.
-This can be accomplished with technique called <a href="https://en.wikipedia.org/wiki/Code_cave" target="_blank">Code cave</a>
-</p>
-<p>The game is performing AND operation with <code>0x1F</code> on line <code>10026E9</code> (see x64dbg screenshot snippet above), both <code>0x0F</code> and <code>0x8F</code> end up being <code>0x0F</code> which is empty tile.</p>
-<p>So what i need to do is change the logic:</p>
-<pre><code>if minefield[tile] == 0x8F
-   draw flag
-else
-   draw tile
-</code></pre><p>The present AND instruction takes 3 bytes of opcode while my logic is more than that. That&rsquo;s why code cave is needed.</p>
-<p>This is the assembly my logic needs:</p>
-<pre><code>CMP AL, 8F
-JNZ 01004D08
-MOV AL, 0E
-PUSH DWORD PTR DS:[EAX*4+1005A20]
-JMP 010026F3
-</code></pre><p><strong>How did i get <code>0E</code> byte?</strong>
-By flaging tile in minefield and looking into memory to see what was before and turned into <code>0E</code>.</p>
-<p>For my assembly code to run, I need to JMP from the original code. But as JMP opcode is more than 3 bytes, meaning I have to override not only the AND instruction but also the one following it (that&rsquo;s why 4th line exists in my assembly).
-The remaining bytes are padded with NOPs.</p>
-<p>That&rsquo;s it! Now when we patch the game and run it all mine fields are flaged :)</p>
-<p><img src="https://raw.githubusercontent.com/realbugdigger/MinesweeperHack/main/images/patched.png" alt="patched minesweeper"></p>
-<h2 id="alternate-ways-of-approaching-the-game">Alternate ways of approaching the game</h2>
-<p>When we open the game we can see that it consists of a minefield.
-The way I would program this game is to make minefield as a matrix and making mines load at random fields everytime we start a game.
-So you can start with that assumption.
-Look for some kind of &ldquo;random&rdquo; function in PE imports and I think that can get you rolling.</p>
-<p>When you start playing the game there are sounds being made: time ticker and mine explosion (possibly even more)
-Again look in PE Imports for some &ldquo;sound&rdquo; function because it&rsquo;s very unlikely they have made their own sound function for the game and just used existing one (possibly from Windows API).</p>
-<h2 id="conclusion">Conclusion</h2>
-<p>I hope that this writeup has helped someone and provided them some insight about reverse engineering.
-Inspiration and a lot of accumulated knowledge needed to complete this project came from <a href="https://www.begin.re/hacking-minesweeper">https://www.begin.re/hacking-minesweeper</a></p>
+<p>Source code: <a href="https://github.com/realbugdigger/Call-of-Duty-WaW-Hack">https://github.com/realbugdigger/Call-of-Duty-WaW-Hack</a></p>
+<h2 id="overview-of-the-hack-execution">Overview of the hack execution</h2>
+<p>Hack is injected via dll injector.
+Next, when injected, it performs function hooking on Direct3D9 EndScene function.
+EndScene() is the function called when the game is finished drawing the next frame to be displayed on the screen, meaning all the drawing by the game is completed, so any drawing we do, will render on top of the finished scene.
+After our EndScene hook returns it will call the real EndScene and the image will be rendered on the screen.
+That makes hack execute every frame which makes it very fast!</p>
+<p>In consideration of the comprehensive nature of this hack, delving into its entire depth would make for an extensive read.
+Therefore, this post will focus on explaining key components of the hack, ensuring a concise yet insightful information for the reader.
+This approach will provide a solid understanding of its prime features without overwhelming you with excessive detail.</p>
+<h3 id="cheat-table">Cheat table</h3>
+<p>Let&rsquo;s start with cheat engine table that I set up.</p>
+<p><img src="https://raw.githubusercontent.com/realbugdigger/Call-of-Duty-WaW-Hack/master/images/codwaw_singleplayer_ce.png" alt="Cheat Engine Table"></p>
+<h4 id="zombie-mod-points-and-grenades">Zombie mod points and Grenades</h4>
+<p>Finding zombie mod points address was very easy. Entering starting value in cheat engine and increasing it each time zombie is killed and decreasing it whenever I would spend points.</p>
+<p>By &ldquo;Locking the value&rdquo; what I am actually doing is writing the random value at the prevoisly found address every time hack executes.</p>
+<p>Same thing was done with grenades, everytime I would throw it I would decrease the value in the cheat engine and when the address that contains the value was found I would overwrite it with custom value.</p>
+<h4 id="infinite-ammo">Infinite ammo</h4>
+<p>Same as for previous two values ammo value address was also found by decreasing and increasing (shooting and reloading). When I went to see what access it I saw an interesting instruction that was being executed no matter what weapon shot was selected.
+I thought that this must be part of some kind of &ldquo;decrease ammo value&rdquo; function!</p>
+<p><img src="https://raw.githubusercontent.com/realbugdigger/Call-of-Duty-WaW-Hack/master/images/decreaseAmmo.png" alt="Ammo dec orignial"></p>
+<p>When <strong>nopping</strong> the instruction and shooting again, ammo was not decreasing.</p>
+<p><img src="https://raw.githubusercontent.com/realbugdigger/Call-of-Duty-WaW-Hack/master/images/noppedDecAmmo.png" alt="Ammo dec nopped"></p>
+<h5 id="what-is-nopping">What is Nopping?</h5>
+<p>&ldquo;Nopping&rdquo; refers to the process of replacing an original instruction with a &ldquo;No Operation&rdquo; (NOP) command in assembly language.
+The NOP command is essentially an instruction that does nothing. &ldquo;Nop&rdquo; stands for &ldquo;No Operation&rdquo;.
+This process could be used for a number of purposes, including maintaining code alignment, adding delays, patching code, and others.</p>
+<p>In the context of converting an original instruction into all NOP commands, it essentially means replacing functional instructions with instructions that do nothing, making the original code inert.
+These NOP commands still take up the same amount of memory as the instructions they&rsquo;ve replaced, but when executed, they don&rsquo;t change any registers, flags, or the program&rsquo;s state. They just consume clock cycles.</p>
+<h4 id="local-player-and-zombie-data">Local player and Zombie data</h4>
+<p>Local player health and coordinates and for zombies was a bit harder to find. For player health I had to thrown grenades in near proximity so it would hurt me enough but not kill me, that moment was used to scan memory for a decreased value, and when player would start recovering, in cheat engine I would search for increased value. Similiar process was applied to zombies just without recovering.</p>
+<p>When looking at the memory region where found address was located, in ReClass.Net I found local player coordinates and view angle.</p>
+<p>For the cords of the zombies I decided to first find Z coordinate since will be easiest. I selected one random zombie a let him &ldquo;follow me&rdquo;.
+By that I mean whenever he followed my up the stairs I increased the unknown value of a Z coordinate for a zombie.
+And when he walked down I decreaded. Then when he was on &ldquo;same level&rdquo; as me on some platform I searched the value of my z coordinate since zombie will have the same.
+That&rsquo;s how I found the z cord for one zombie. The x and y were right next to it.</p>
+<p>I repeated the process for another zombie after I restarted the game and found out that two vector3 structures for those two zombies were relativly close in memory!
+I looked at that memory region in ReClass and started noticing some patterns, in the same memory region I found more cords for newly spawned zombies!
+As I did more reverse enginering I found some more data and metadata about the entity list I was looking at, but as I said I am trying to not make this blog post to long.</p>
+<p>To conclude with entity list I found out that the size of the enities was 0x88. This will come in handy when writting ESP 2D boxes around zombies.</p>
+<h3 id="dll-injection">DLL injection</h3>
+<p>DLL Injection is a technique used for running code within the context of another process by forcing it to load a dynamic-link library (DLL).
+DLL injection is often used by external programs to influence the behavior of another program in a way its authors did not anticipate or intend.</p>
+<h4 id="enumerating-processes">Enumerating Processes</h4>
+<p>First step needed for Dll injection is to select which process we want to inject into. For the hack the name of executable is given <code>codwaw.exe</code>.
+Windows system API function <a href="https://learn.microsoft.com/en-us/windows/win32/api/tlhelp32/nf-tlhelp32-createtoolhelp32snapshot" target="_blank">CreateToolhelp32Snapshot</a>
+ will be used to take a snapshot of all processes running on the system at the moment.
+We then need enumerate the running processes on the machine to see if any have the name of the process we want to inject into.</p>
+<h4 id="the-injection-steps">The injection steps</h4>
+<p>After getting process handle to the target process the next step is to inject the DLL into the target process which will require the use of several Windows APIs.</p>
+<p>First the address of <code>LoadLibraryW</code> needs to be found. Why this function is used? It&rsquo;s part of the <code>kernel32.dll</code> which is a dll that is loaded into every process running on the system.</p>
+<p>The next step is to allocate memory in the remote process that can fit the DLL&rsquo;s name using <code>VirtualAllocEx</code>.</p>
+<p>After the memory is successfully allocated in the remote process, it&rsquo;s possible to use WriteProcessMemory to write to the allocated buffer. The DLL&rsquo;s name is written to the previously allocated memory buffer.</p>
+<p>Finall step is using <a href="https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-createremotethread" target="_blank">CreateRemoteThread</a>
+ function will be used to create a new thread in the remote process.
+This is where the address of <code>LoadLibraryW</code> becomes necessary. Address of <code>LoadLibraryW</code> will be starting address of the thread and then address of allocated buffer, which contains the DLL&rsquo;s name, is passed as an argument to the LoadLibraryW call.
+Both of these parameter are passed to <code>CreateRemoteThread</code>.</p>
+<p>And voila the dll injection has happened.</p>
+<h2 id="summary">Summary</h2>
+<p>As we draw this blog post to end, my hope is that this blog post has shed some valuable light on the fascinating realm of game hacks, in particular the practice of DLL injection.
+The intertwining complexities of gaming software and how we can navigate them has been our focus.
+The insights presented in this blog post aim to equip you with an understanding, and appreciation, of the multifaceted process that goes into creating a game hack.
+May this knowledge contribute to enhancing your passion for gaming and inspire you to explore more.</p>
 
   <hr>
 <div class="footer">
     
 	    
-            <a class="previous-post" href="/projects/dirdigger/?ref=footer"><span style="font-weight:bold;">« Previous</span><br>DirDigger</a>
+            <a class="previous-post" href="/projects/karolascript/?ref=footer"><span style="font-weight:bold;">« Previous</span><br>KarolaScript</a>
         
 	    
-            <div class="next-post">
-                <a href="/projects/karolascript/?ref=footer"><span style="font-weight:bold;">Next »</span><br>KarolaScript</a>
-            </div>
-        
     
 </div>
 
@@ -521,15 +524,14 @@ Inspiration and a lot of accumulated knowledge needed to complete this project c
       <h4 id="contents"></h4>
       <nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#hack-content">Hack content</a></li>
+    <li><a href="#overview-of-the-hack-execution">Overview of the hack execution</a>
       <ul>
-        <li><a href="#imported-libraries">Imported Libraries</a></li>
-        <li><a href="#debugger">Debugger</a></li>
+        <li><a href="#cheat-table">Cheat table</a></li>
+        <li><a href="#dll-injection">DLL injection</a></li>
       </ul>
     </li>
-    <li><a href="#code-cave">Code cave</a></li>
-    <li><a href="#alternate-ways-of-approaching-the-game">Alternate ways of approaching the game</a></li>
-    <li><a href="#conclusion">Conclusion</a></li>
+    <li><a href="#summary">Summary</a></li>
   </ul>
 </nav>
     </div>

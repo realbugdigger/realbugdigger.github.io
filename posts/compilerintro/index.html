@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    
+
+
+
+
+
+
+
+
+
+
+<script defer language="javascript" type="text/javascript" src="/js/bundle.min.2dae66e7da7114122d68fc2e53c702586340b8ff5ccc57087f039233a96a7cd3.js"></script>
+
+
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+    <link rel="icon" href=/ABug_white.svg>
+
+    
+    
+
+
+
+
+
+  
+ 
+
+ 
+
+
+  
+  
+  
+ 
+
+
+
+   
+
+
+
+  
+  
+    
+  
+  
+
+
+
+  
+    
+    
+  
+
+
+
+<title itemprop="name">Bug Digger - Compilers Introduction</title>
+<meta property="og:title" content=Bug&#32;Digger&#32;-&#32;Compilers&#32;Introduction />
+<meta name="twitter:title" content=Bug&#32;Digger&#32;-&#32;Compilers&#32;Introduction />
+<meta itemprop="name" content=Bug&#32;Digger&#32;-&#32;Compilers&#32;Introduction />
+<meta name="application-name" content=Bug&#32;Digger&#32;-&#32;Compilers&#32;Introduction />
+<meta property="og:site_name" content="" />
+
+
+<meta name="description" content="" />
+<meta itemprop="description" content="" />
+<meta property="og:description" content="" />
+<meta name="twitter:description" content="" />
+
+
+<base href="/posts/compilerintro/" />
+<link rel="canonical" href="/posts/compilerintro/" itemprop="url" />
+<meta name="url" content="/posts/compilerintro/" />
+<meta name="twitter:url" content="/posts/compilerintro/" />
+<meta property="og:url" content="/posts/compilerintro/" />
+
+
+
+<meta itemprop="image" content="/images/unnamed3_huef2688c47c9cb8353889f7ef68d7bc45_16055_1200x630_fit_box_2.png" />
+<meta property="og:image" content="/images/unnamed3_huef2688c47c9cb8353889f7ef68d7bc45_16055_1200x630_fit_box_2.png" />
+<meta property="og:image:width" content="630" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:image" content="/images/unnamed3_huef2688c47c9cb8353889f7ef68d7bc45_16055_1200x630_fit_box_2.png" />
+<meta name="twitter:image:src" content="/images/unnamed3_huef2688c47c9cb8353889f7ef68d7bc45_16055_1200x630_fit_box_2.png" />
+
+
+
+<meta property="og:updated_time" content=3012-03-12T120:00:23Z />
+
+
+<link rel="sitemap" type="application/xml" title="Sitemap" href='sitemap.xml' />
+
+<meta name="robots" content="index,follow" />
+<meta name="googlebot" content="index,follow" />
+
+
+<meta name="twitter:site" content="https://twitter.com/digger_bug" />
+<meta name="twitter:creator" content="https://twitter.com/digger_bug" />
+<meta property="fb:admins" content="" />
+
+
+<meta name="apple-mobile-web-app-title" content="" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+
+
+
+
+ 
+
+
+<meta property="og:type" content="article" />
+<meta property="article:publisher" content="" />
+<meta property="og:article:published_time" content=3012-03-12T120:00:23Z />
+<meta property="article:published_time" content=3012-03-12T120:00:23Z />
+
+
+
+
+
+<script defer type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "Compilers Introduction",
+    "author": {
+      "@type": "Person",
+      "name": "https:\/\/github.com\/realbugdigger"
+    },
+    "datePublished": "2023-12-03",
+    "description": "",
+    "wordCount":  2516 ,
+    "mainEntityOfPage": "True",
+    "dateModified": "2023-12-03",
+    "image": {
+      "@type": "imageObject",
+      "url": "\/images\/unnamed3_huef2688c47c9cb8353889f7ef68d7bc45_16055_1200x630_fit_box_2.png"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "",
+      "logo": {
+        "@type": "imageObject",
+        "url": "\/ABug_white.svg"
+      }
+    }
+  }
+</script>
+
+
+
+<meta name="generator" content="Hugo 0.68.3" />
+
+
+    
+    
+
+<link type="text/css" rel="stylesheet" href="/css/bundle.min.c1dc3cf82f8a45efb9d930b62397d258ffc4f855647e0bf92e0b9a185022da1b.css">
+
+
+    
+    <style>
+    body {
+        --sidebar-bg-color: #202020;
+        --sidebar-img-border-color: #515151;
+        --sidebar-p-color: #909090;
+        --sidebar-h1-color: #FFF;
+        --sidebar-a-color: #FFF;
+        --sidebar-socials-color: #FFF;
+        --text-color: #222;
+        --bkg-color: #FAF9F6;
+        --post-title-color: #303030;
+        --list-color: #5a5a5a;
+        --link-color: #268bd2;
+        --date-color: #515151;
+        --table-border-color: #E5E5E5;
+        --table-stripe-color: #F9F9F9;
+        --code-color: #bf616a;
+        --code-background-color: #E5E5E5;
+        --moon-sun-color: #FFF;
+        --moon-sun-background-color: #515151;
+    }
+    body.dark-theme {
+        --text-color: #eee;
+        --bkg-color: #121212;
+        --post-title-color: #DBE2E9;
+        --list-color: #9d9d9d;
+        --link-color: #268bd2;
+        --date-color: #9a9a9a;
+        --table-border-color: #515151;
+        --table-stripe-color: #202020;
+        --code-color: #ff7f7f;
+        --code-background-color: #393D47;
+    }
+    body {
+        background-color: var(--bkg-color);
+    }
+</style>
+
+</head>
+
+    <body class="dark-theme">
+        <div class="wrapper">
+            <aside class="sidebar">
+    <div class="container sidebar-sticky">
+        <div class="light-dark" align="right">
+    <button class="btn-light-dark" title="Toggle light/dark mode">
+        <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16">
+            <path fill="currentColor" d="M6 .278a.768.768 0 0 1 .08.858a7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277c.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316a.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71C0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
+        </svg>
+        <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16">
+            <path fill="currentColor" d="M8 12a4 4 0 1 0 0-8a4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+        </svg>
+    </button>
+</div>
+
+        <div class="sidebar-about">
+    <h1 class="brand">
+        
+            <a href="">
+                <img src="/unnamed3.png" alt="brand image">
+            </a>
+        
+        
+            <a href="">
+                <h1>Bug Digger</h1>
+            </a>
+        
+    </h1>
+    <p class="lead">
+    Research and Development
+    </p>
+</div>
+
+        <nav>
+    <ul class="sidebar-nav">
+
+        
+        
+        
+        
+            
+
+            
+                
+                    <li class="heading">
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                
+            
+                
+            
+                
+            
+            
+                
+            
+                
+            
+        
+        
+            
+
+            
+                
+            
+                
+                    <li class="heading">
+                        <a href="/posts/">Posts</a>
+                    </li>
+                    
+                        <li class="sub-heading">
+                            Recent
+                        </li>
+                        
+                            <li class="bullet">
+                                <a href="/posts/compilerintro/">Compilers Introduction</a>
+                            </li>
+                        
+                    
+                
+            
+                
+            
+            
+                
+            
+                
+            
+        
+        
+            
+
+            
+                
+            
+                
+            
+                
+                    <li class="heading">
+                        <a href="/projects/">Projects</a>
+                    </li>
+                    
+                        <li class="sub-heading">
+                            Recent
+                        </li>
+                        
+                            <li class="bullet">
+                                <a href="/projects/codwaw_hack/">Call of Duty WaW Zombie mod hack</a>
+                            </li>
+                        
+                            <li class="bullet">
+                                <a href="/projects/karolascript/">KarolaScript</a>
+                            </li>
+                        
+                            <li class="bullet">
+                                <a href="/projects/minesweeper/">Minesweeper Hack</a>
+                            </li>
+                        
+                            <li class="bullet">
+                                <a href="/projects/dirdigger/">DirDigger</a>
+                            </li>
+                        
+                    
+                
+            
+            
+                
+            
+                
+            
+        
+
+    </ul>
+</nav>
+
+        
+    <a target="_blank" class="social" title="GitHub" href="https://github.com/realbugdigger">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="-2 -2 24 24">
+            <path fill="currentColor" d="M18.88 1.099C18.147.366 17.265 0 16.233 0H3.746C2.714 0 1.832.366 1.099 1.099C.366 1.832 0 2.714 0 3.746v12.487c0 1.032.366 1.914 1.099 2.647c.733.733 1.615 1.099 2.647 1.099H6.66c.19 0 .333-.007.429-.02a.504.504 0 0 0 .286-.169c.095-.1.143-.245.143-.435l-.007-.885c-.004-.564-.006-1.01-.006-1.34l-.3.052c-.19.035-.43.05-.721.046a5.555 5.555 0 0 1-.904-.091a2.026 2.026 0 0 1-.872-.39a1.651 1.651 0 0 1-.572-.8l-.13-.3a3.25 3.25 0 0 0-.41-.663c-.186-.243-.375-.407-.566-.494l-.09-.065a.956.956 0 0 1-.17-.156a.723.723 0 0 1-.117-.182c-.026-.061-.004-.111.065-.15c.07-.04.195-.059.378-.059l.26.04c.173.034.388.138.643.311a2.1 2.1 0 0 1 .631.677c.2.355.44.626.722.813c.282.186.566.28.852.28c.286 0 .533-.022.742-.065a2.59 2.59 0 0 0 .585-.196c.078-.58.29-1.028.637-1.34a8.907 8.907 0 0 1-1.333-.234a5.314 5.314 0 0 1-1.223-.507a3.5 3.5 0 0 1-1.047-.872c-.277-.347-.505-.802-.683-1.365c-.177-.564-.266-1.215-.266-1.952c0-1.049.342-1.942 1.027-2.68c-.32-.788-.29-1.673.091-2.652c.252-.079.625-.02 1.119.175c.494.195.856.362 1.086.5c.23.14.414.257.553.352a9.233 9.233 0 0 1 2.497-.338c.859 0 1.691.113 2.498.338l.494-.312a6.997 6.997 0 0 1 1.197-.572c.46-.174.81-.221 1.054-.143c.39.98.424 1.864.103 2.653c.685.737 1.028 1.63 1.028 2.68c0 .737-.089 1.39-.267 1.957c-.177.568-.407 1.023-.689 1.366a3.65 3.65 0 0 1-1.053.865c-.42.234-.828.403-1.223.507a8.9 8.9 0 0 1-1.333.235c.45.39.676 1.005.676 1.846v3.11c0 .147.021.266.065.357a.36.36 0 0 0 .208.189c.096.034.18.056.254.064c.074.01.18.013.318.013h2.914c1.032 0 1.914-.366 2.647-1.099c.732-.732 1.099-1.615 1.099-2.647V3.746c0-1.032-.367-1.914-1.1-2.647z"/>
+        </svg>
+    </a>
+
+
+
+    <a target="_blank" class="social" title="LinkedIn" href="https://www.linkedin.com/in/marko-mladenovic-9764721b7">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1.2em" viewBox="0 0 448 512">
+            <path fill="currentColor" d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5c0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7c-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5c67.2 0 79.7 44.3 79.7 101.9V416z"/>
+        </svg>
+    </a>
+
+
+    <a target="_blank" class="social" title="Twitter" href="https://twitter.com/digger_bug">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 16 16">
+            <path fill="currentColor" d="M5.032 14.286c6.037 0 9.34-4.837 9.34-9.032c0-.137 0-.274-.01-.41A6.56 6.56 0 0 0 16 3.2c-.6.256-1.235.425-1.885.5a3.207 3.207 0 0 0 1.443-1.757c-.645.37-1.35.63-2.085.77a3.322 3.322 0 0 0-1.862-.958a3.384 3.384 0 0 0-2.082.334a3.223 3.223 0 0 0-1.442 1.49a3.08 3.08 0 0 0-.208 2.03a9.57 9.57 0 0 1-3.747-.963a9.269 9.269 0 0 1-3.018-2.354a3.086 3.086 0 0 0-.36 2.314c.189.787.68 1.475 1.376 1.924a3.344 3.344 0 0 1-1.49-.398v.04c0 .734.263 1.444.743 2.01a3.3 3.3 0 0 0 1.89 1.102c-.483.128-.99.146-1.482.055a3.19 3.19 0 0 0 1.168 1.577a3.36 3.36 0 0 0 1.9.627A6.732 6.732 0 0 1 0 12.86a9.527 9.527 0 0 0 5.032 1.423"/>
+        </svg>
+    </a>
+
+
+
+
+    <a target="_blank" class="social" title="Discord" href="https://discordapp.com/users/780168324327800872">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M19.27 5.33C17.94 4.71 16.5 4.26 15 4a.09.09 0 0 0-.07.03c-.18.33-.39.76-.53 1.09a16.09 16.09 0 0 0-4.8 0c-.14-.34-.35-.76-.54-1.09c-.01-.02-.04-.03-.07-.03c-1.5.26-2.93.71-4.27 1.33c-.01 0-.02.01-.03.02c-2.72 4.07-3.47 8.03-3.1 11.95c0 .02.01.04.03.05c1.8 1.32 3.53 2.12 5.24 2.65c.03.01.06 0 .07-.02c.4-.55.76-1.13 1.07-1.74c.02-.04 0-.08-.04-.09c-.57-.22-1.11-.48-1.64-.78c-.04-.02-.04-.08-.01-.11c.11-.08.22-.17.33-.25c.02-.02.05-.02.07-.01c3.44 1.57 7.15 1.57 10.55 0c.02-.01.05-.01.07.01c.11.09.22.17.33.26c.04.03.04.09-.01.11c-.52.31-1.07.56-1.64.78c-.04.01-.05.06-.04.09c.32.61.68 1.19 1.07 1.74c.03.01.06.02.09.01c1.72-.53 3.45-1.33 5.25-2.65c.02-.01.03-.03.03-.05c.44-4.53-.73-8.46-3.1-11.95c-.01-.01-.02-.02-.04-.02zM8.52 14.91c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.84 2.12-1.89 2.12zm6.97 0c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.83 2.12-1.89 2.12z"/>
+        </svg>
+    </a>
+
+
+
+
+
+
+
+
+
+
+    <a target="_blank" class="social" title="Email" href="mailto://marko@bugdigger.com">
+       <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1.2em" viewBox="0 0 485.211 485.211">
+            <path fill="currentColor" d="M301.393,241.631L464.866,424.56H20.332l163.474-182.928l58.801,51.443L301.393,241.631z M462.174,60.651H23.027 l219.579,192.142L462.174,60.651z M324.225,221.67l160.986,180.151V80.792L324.225,221.67z M0,80.792v321.029L160.972,221.64 L0,80.792z"/>
+       </svg>
+    </a>
+
+
+        
+  </div>
+</aside>
+
+            <main class="content container">
+                <div class="post">
+  <div class="info">
+    <h1 class="post-title">
+        <a href="/posts/compilerintro/">Compilers Introduction</a>
+    </h1>
+    
+        <time datetime="2023-12-03T00:00:00Z" class="post-date">
+            December 3, 2023
+        </time>
+    
+    
+    <ul class="tags">
+        
+        <li class="tag-Reverse engineering">
+            <a href="tags/reverse-engineering">Reverse engineering</a>
+        </li>
+        
+        <li class="tag-Compilers">
+            <a href="tags/compilers">Compilers</a>
+        </li>
+        
+    </ul>
+    
+    
+    
+    
+    
+    
+</div>
+
+  <p>If you&rsquo;ve ever found yourself intrigued by the complex science behind how exactly your written code transforms into an understandable stream of zeroes and ones, then you&rsquo;re in exactly the right place.
+The realm of computer science goes far beyond just writing lines of code — at its core, it is about facilitating communication between humans and machines.
+This blog post pulls back the curtain on one such essential tool that makes this interaction possible: compilers.</p>
+<p>Join me as I traverse this computational journey, delving into the labyrinth of compilers which play the quintessential role in translating your human-readable syntax into machine language.
+There&rsquo;s a whole lot more to programming than just inputting commands — bear with us and soon, you&rsquo;ll understand compilers, not merely as obscure tools, but as a vital bridge between human ingenuity and digital execution.</p>
+<h3 id="compilation-process">Compilation Process</h3>
+<p><img src="https://raw.githubusercontent.com/realbugdigger/Knowledge-Base-Compilers/e9307131e259e1f21066b3a48379816f4da9814f/compilerProcess.svg" alt="Compiler Process"></p>
+<h4 id="front-end-of-compiler">Front-end of Compiler</h4>
+<p>The front end of a compiler is the first stage in the compilation process and it primarily involves syntax and semantic checks. The process begins with the lexer (also referred to as the scanner), which takes the source code and breaks it down into individual components called tokens.
+These tokens are integral parts of the source code such as keywords, identifiers, literals, punctuation, and operators, each serving its own respective role.</p>
+<p>Afterwards, these tokens are passed on to the parser. The parser has the critical job of constructing an Abstract Syntax Tree (AST), essentially serving as a graphical representation of your code&rsquo;s structure following its grammatical rules.
+It&rsquo;s through this AST that we can really begin to understand the organization and flow of our code.</p>
+<pre><code>Programming Language (PL) grammar refers to the set of production rules for writing programs in that language. It's a formal set of rules that dictates what sequences of symbols or tokens form a syntactically correct program.
+These rules are used to parse and compile programs.
+
+The most common grammar types are:
+
+    - Regular Grammar (Type 3): The simplest type of grammar used to define regular languages. Regular languages are usually defined using regular expressions. They can be parsed by finite automata and regular expressions.
+
+    - Context-Free Grammar (Type 2): This is widely used in defining syntax for programming languages. It can represent nested structures. Context-free grammars have rules in the form A → γ, where A is a single nonterminal symbol and γ is a string of terminals and/or nonterminals.
+      This type of grammar is recognized by pushdown automata.
+
+    - Context-Sensitive Grammar (Type 1): It can handle complex context-sensitive languages. In a context-sensitive production rule, the replacement can be determined based on the context of a nonterminal symbol. The Chomsky Normal form is not valid for context-sensitive languages.
+
+    - Unrestricted Grammar (Type 0): It doesn't impose any restrictions like its counterparts. Therefore, the rules can associate any string of grammatical symbols with another. They are used for defining the syntactical structure of Turing recognizable languages.
+
+</code></pre><p>If the programming language is statically typed, the type checking component of the front-end comes into play now. It ensures that the operations performed are appropriate for their respective data types.
+In other words, it examines each operation and ensures that the operands are legally capable of being operated upon.</p>
+<p>Finally, the resolver steps in to check and ensure every name (variable, function or class) is properly declared before it is used. By performing this cross-checking, it resolves bindings and associations to the precise, correct entities.</p>
+<p>This sequence of processes effectively turns your source code into a checked and contextualised structure ready for the next stages of compilation. Now, how fascinating is that?</p>
+<pre><code>Note: Languages like C and C++ have **preprocessing** phase before tokenization. Preprocessor includes other files in the source code file and replaces macros with their actual body and processes conditional directives to produce a single intermediate file that's then passed onto the next phase, the lexical analysis phase.
+
+Fun-fact #1: While the #include directive in C/C++ literally copy-pastes the content of the included file, import in Java and using in C# only make classes or namespaces available in your script, they don't include the code directly.
+</code></pre><h4 id="middle-end-of-compiler">Middle-end of Compiler</h4>
+<p>The middle-end of the compiler is the next crucial stage after the front-end has done its job, serving as a bridge between the front-end and back-end compiler.
+This stage is highly significant as it focuses on optimization functions mainly to enhance the performance and efficiency of the target program.</p>
+<p>Once the front-end provides the Abstract Syntax Tree (AST), the middle-end takes over to translate it into an Intermediate Representation (IR).
+This IR is a machine-independent code representation, which can seamlessly work across different compilers and target architectures.</p>
+<p>One of the fundamental steps in this stage is &lsquo;optimization&rsquo;. The optimization phase aims to improve your code by eliminating redundancies, reducing resources, and streamlining the execution process — all without altering the functionality of the code.
+This process includes dead code elimination, strength reduction, loop unrolling and many other techniques. Hence, it significantly reduces the complexities and inefficiencies present in the high-level source code, resulting in a powerful, efficient, and performant bytecode.</p>
+<p>The final product of the middle-end is an optimized IR, ready for the back-end to translate into target-specific code. By its efficient and optimized handling of the code, it significantly improves the performance of the final executable, thereby adding vital efficiency to the software lifecycle.
+The magic of the middle-end of the compiler is that, while it might not be visible to the end-users, it is what transforms good software into exceptional software.</p>
+<h5 id="llvm-and-rtl-as-intermediate-representation">LLVM and RTL as Intermediate Representation</h5>
+<p>LLVM and RTL (Register Transfer Language) are both used within compiler systems, but they perform distinct roles and operate at different levels within the compiler’s structure. Specifically, LLVM is a set of compiler and toolchain technologies, whereas RTL is a type of intermediate representation (IR) used within the GNU Compiler Collection (GCC).</p>
+<ol>
+<li>
+<p>LLVM:</p>
+<p>This is a compiler infrastructure, designed to be a set of reusable libraries with well-defined interfaces. It includes several components, including Clang (a C/C++ compiler frontend), and LLVM IR, which is an intermediate representation (a low-level programming language) used in the LLVM.
+LLVM provides a series of modular compiler components that can be used for a variety of tasks, from frontend parsing to code generation.
+Its focus is on enabling effective optimizations, providing support for static, just-in-time, and machine code generation, and ensuring that it&rsquo;s easy to add support for new hardware and languages.</p>
+</li>
+<li>
+<p>RTL (Register Transfer Language):</p>
+<p>RTL is an intermediate language used in GCC to express data movements between registers and the operations performed on them. It is a low-level IR, closer to assembly language than high-level source code.
+RTL has been designed to be a flexible and general IL that can handle operations for a broad range of processor architectures. GCC parses source code, translates it into RTL, and then uses this representation to perform further steps, like optimizations and machine code generation.</p>
+</li>
+</ol>
+<p>In essence, both LLVM and RTL facilitate the process of compiling source code into machine code.
+However, they function at different stages of the process and serve different purposes - LLVM is a broader infrastructure which includes a variety of tools and components, while RTL is a specific form of IL used within GCC.</p>
+<h4 id="back-end-of-compiler">Back-end of Compiler</h4>
+<p>The final and equally crucial stage in the compilation process is known as the back-end of the compiler. After the front and middle-ends have done their jobs, the back-end steps in to put the finishing touches on the code translation journey.</p>
+<p>Its primary objective involves transforming the optimized Intermediate Representation (IR) of the source code, provided by the middle-end, into a machine or target language code specific to the target architecture.
+The chief components of this phase are the Code Generator and the Optimizer.</p>
+<p>The Code Generator takes the platform-agnostic IR and translates it into a sequence of machine-level instructions, while ensuring efficient usage of the machine&rsquo;s resources, such as registers and memory.
+This machine-specific code is typically represented in assembly language.</p>
+<p>On the other hand, the Optimizer helps in further refining and bettering the target code, ensuring that it performs as efficiently as possible on the intended hardware without duplicating effort with the middle-end optimization phase.
+The optimizations at the back-end stage focus on the characteristics of the target machine and its resources.</p>
+<p>It&rsquo;s important to note that the specific delineation of tasks between the middle-end and the back-end can vary somewhat depending on the structure of the specific compiler.
+In some compiler models, the division of work might blur, with some tasks falling into a grey area between the middle-end and the back-end.
+In summary, the back-end of the compiler polishes the generated intermediate code, optimizing it for the target machine to yield the best possible runtime performance, thereby playing an indispensable part in the grand compilation journey.</p>
+<h3 id="word-on-interpreted-languages">Word on interpreted languages</h3>
+<p>Both interpreted and compiled languages allow developers to write programs that perform specific functionalities. However, the key difference between them lies in what happens when you run your code.</p>
+<p>Here&rsquo;s a comparison of the two:</p>
+<ul>
+<li>Compiled Languages
+<ul>
+<li>Compilation Process: Compiled languages are converted directly into machine code that the processor can execute. This process happens before the program is run, and it produces an executable program.</li>
+<li>Speed: Because the code is directly converted into machine code, compiled languages are usually faster to run, since this bypasses the translation step that interpreted languages go through.</li>
+<li>Examples: Examples of compiled languages include C, C++, Go, Rust, and Swift.</li>
+<li>Debugging: Bugs are usually easier to manage because they are found during the compilation process.</li>
+<li>Portability: Programs are not easily portable to different kinds of computers. To run the program on a different hardware, it must be recompiled on the target machine.</li>
+</ul>
+</li>
+<li>Interpreted Languages
+<ul>
+<li>Interpretation Process: Interpreted languages are not converted to machine code all at once; rather, they are translated line-by-line by the interpreter at runtime.</li>
+<li>Speed: They are typically slower, because the interpreter must translate each line of code to machine code every time the script runs.</li>
+<li>Examples: Examples include Python, Ruby, JavaScript, and PHP.</li>
+<li>Debugging: Debugging can be more challenging, because errors may not surface until the problematic code is interpreted.</li>
+<li>Portability: They are more portable. You can run the program on any machine with the appropriate interpreter, without needing to recompile.</li>
+</ul>
+</li>
+</ul>
+<p>Regardless, it&rsquo;s important to mention that the line between interpreted and compiled languages has blurred in recent years. This is due to the use of techniques like bytecode compilation and Just-In-Time (JIT) compilation utilized by languages (like Java and Python) to bridge the gap between the two paradigms and derive benefits from both. With JIT, for example, code is compiled and optimized during execution at runtime, not prior to execution.</p>
+<h4 id="code-virtualization-and-virtual-machine">Code virtualization and Virtual machine</h4>
+<p>Code Virtualization is a programming technique that enables an application&rsquo;s code to be isolated and executed in an encapsulated and secure environment. This process involves translating a program&rsquo;s source code into an intermediate, bytecode representation, which is then interpreted by a so-called &ldquo;virtual machine&rdquo; (not to be confused with VMs in the context of hardware virtualization). Think of virtual machine as <em>emulator</em> - a simulated chip that interprets bytecode at runtime.</p>
+<p>This technique adds an extra layer of security, as the bytecode can make it more difficult for hackers to understand and exploit a program. Code Virtualization is popularly used in software protection schemes to prevent reverse engineering and tampering.</p>
+<p>Here are some characteristics of Code Virtualization:</p>
+<ol>
+<li>
+<p><strong>Security</strong>: It makes the code hardly understandable by humans, which helps prevent unauthorized copying, tampering, and reverse engineering.</p>
+</li>
+<li>
+<p><strong>Hardware and OS independence</strong>: Programs written in virtualized code can be executed on any hardware and Operating System (OS) that has an appropriate virtual machine.</p>
+</li>
+<li>
+<p><strong>Performance</strong>: Initially, it may have a performance impact due to the real-time interpretation of the intermediate language. But with advanced techniques such as Just-In-Time (JIT) compilation, this performance gap has been substantially reduced.</p>
+</li>
+<li>
+<p><strong>Interoperability</strong>: It enables the integration of applications written in different programming languages into one environment.</p>
+</li>
+</ol>
+<p>It&rsquo;s important to note that Code Virtualization is used in many modern technologies including .NET Framework (CLR - Common Language Runtime), Java (JVM - Java Virtual Machine).</p>
+<h4 id="just-in-time-compilation">Just-in-time compilation</h4>
+<p>A Just-In-Time (JIT) compiler forms a unique branch within the realm of compilers, representing a unique approach to processing code. Unlike conventional compilers, which convert the entire source code into binary code before execution, a JIT compiler compiles it during the program&rsquo;s execution.</p>
+<p>The primary advantage of this technique is that it facilitates &lsquo;lazy compilation&rsquo;. This means that code segments are compiled and translated into machine code right before they are executed, hence the name &lsquo;Just-In-Time&rsquo;.
+This has an impressive benefit of being capable of compiling only the necessary pieces of code, which can lead to optimized memory usage and improved performance.</p>
+<p>Another compelling feature of a JIT compiler is its ability to perform dynamic runtime optimizations. Unlike traditional &lsquo;Ahead-Of-Time&rsquo; (AOT) compilers, JIT compilers have the ability to gather real-time data while the program is running, and then use that data to optimize the code further.
+They can employ techniques such as method inlining, loop unrolling, and native code generation for frequently executed code paths (often called &lsquo;hot path&rsquo;).</p>
+<p>In simple terms, a Just-In-Time compiler blends the best of both worlds from static compilers and interpreters, effectively offering quick startup times and improved runtime performance.</p>
+<h4 id="garbage-collection">Garbage Collection</h4>
+<p>Garbage Collection (GC) is a critical mechanism in many modern programming languages, playing a crucial role in memory management. As programs execute, they often create objects, arrays, and various data types that occupy memory space. Over time, some of these data entities are no longer accessed or required by the program, yet they continue to take up valuable memory space. The inevitable mistakes can be catastrophic, leading to crashes, memory corruption, or security violations. This is where the utility of Garbage Collection comes into play.</p>
+<p>GC works behind the scenes, cleaning up the memory by identifying and removing these unused objects, effectively freeing up space for ongoing and future computations. It automatically keeps track of all objects in memory, discerns those that are no longer accessible or needed, and reclaims the memory occupied by them.</p>
+<p>The automatic nature of garbage collection significantly simplifies development by abstracting the complex process of manual memory management. Developers can focus on core functionality and logic rather than getting bogged down with intricate memory allocation, de-allocation, or the dreaded debugging of memory leaks and dangling pointers.</p>
+<p>In a nutshell, Garbage Collection contributes to the robustness, safety, and efficiency of a program. However, it&rsquo;s not without its trade-offs, as GC operations may cause performance overheads, especially in memory-constrained systems. Therefore, as always in software development, understanding the strengths and weaknesses of GC can help make thoughtful decisions when programming.</p>
+<h3 id="summary">Summary</h3>
+<p>I just want to say a big &lsquo;thank you&rsquo; for sticking around till the end. I really hope this deep-dive has helped you, especially those awesome folks in the security research community, get a better grip on compiler theory.
+Remember, knowing how compilers work isn&rsquo;t just geeky, it&rsquo;s also pretty critical for creating secure and efficient software.</p>
+
+  <hr>
+<div class="footer">
+    
+	    
+	    
+    
+</div>
+
+  
+</div>
+            </main>
+            
+  <div class="article-toc ">
+    <div class="toc-wrapper">
+      <h4 id="contents"></h4>
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#compilation-process">Compilation Process</a></li>
+        <li><a href="#word-on-interpreted-languages">Word on interpreted languages</a></li>
+        <li><a href="#summary">Summary</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+
+        </div>
+    </body>
+</html>
